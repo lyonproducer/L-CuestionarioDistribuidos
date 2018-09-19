@@ -17,19 +17,19 @@ class InstintoController extends Controller
 
     public function indexReformador(){
 
-        $preguntas = PreguntasInstinto::where('tipo','Reformador')->take(3)->get();
+        $preguntas = PreguntasInstinto::where('tipo','Reformador')->take(5)->get();
         return response()->json($preguntas);
     }
 
     public function indexProtector(){
 
-        $preguntas = PreguntasInstinto::where('tipo','Protector')->take(3)->get();
+        $preguntas = PreguntasInstinto::where('tipo','Protector')->take(5)->get();
         return response()->json($preguntas);
     }
 
     public function indexPacifico(){
 
-        $preguntas = PreguntasInstinto::where('tipo','Pacifico')->take(3)->get();
+        $preguntas = PreguntasInstinto::where('tipo','Pacifico')->take(5)->get();
         return response()->json($preguntas);
     }
 

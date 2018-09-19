@@ -21,6 +21,8 @@ Route::group([
 
     //User
     Route::get('user', 'UserController@index');
+    Route::get('resultado', 'UserController@indexResultados');
+    
     Route::post('user', 'UserController@storeUser');
     Route::post('userResultado', 'UserController@storeResultado');
 

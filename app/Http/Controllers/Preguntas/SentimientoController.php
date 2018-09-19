@@ -17,19 +17,19 @@ class SentimientoController extends Controller
 
     public function indexAyudador(){
 
-        $preguntas = PreguntasSentimiento::where('tipo','Ayudador')->take(3)->get();
+        $preguntas = PreguntasSentimiento::where('tipo','Ayudador')->take(5)->get();
         return response()->json($preguntas);
     }
 
     public function indexTriunfador(){
 
-        $preguntas = PreguntasSentimiento::where('tipo','Triunfador')->take(3)->get();
+        $preguntas = PreguntasSentimiento::where('tipo','Triunfador')->take(5)->get();
         return response()->json($preguntas);
     }
 
     public function indexArtista(){
 
-        $preguntas = PreguntasSentimiento::where('tipo','Artista')->take(3)->get();
+        $preguntas = PreguntasSentimiento::where('tipo','Artista')->take(5)->get();
         return response()->json($preguntas);
     }
 

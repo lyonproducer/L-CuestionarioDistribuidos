@@ -21,6 +21,13 @@ class UserController extends Controller
         return $users;
     }
 
+    public function indexResultados()
+    {   
+        $result = Resultado::all();
+        //$users = DB::connection('mongodb')->collection('usuarios')->get();
+        return $result;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -17,19 +17,19 @@ class PensamientoController extends Controller
 
     public function indexPensador(){
 
-        $preguntas = PreguntasPensamiento::where('tipo','Pensador')->take(2)->get();
+        $preguntas = PreguntasPensamiento::where('tipo','Pensador')->take(5)->get();
         return response()->json($preguntas);
     }
 
     public function indexLeal(){
 
-        $preguntas = PreguntasPensamiento::where('tipo','Leal')->take(2)->get();
+        $preguntas = PreguntasPensamiento::where('tipo','Leal')->take(5)->get();
         return response()->json($preguntas);
     }
 
     public function indexEntusiasta(){
 
-        $preguntas = PreguntasPensamiento::where('tipo','Entusiasta')->take(2)->get();
+        $preguntas = PreguntasPensamiento::where('tipo','Entusiasta')->take(5)->get();
         return response()->json($preguntas);
     }
 
