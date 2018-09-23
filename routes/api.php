@@ -68,5 +68,10 @@ Route::group([
     Route::get('preguntasPacifico', 'Preguntas\InstintoController@indexPacifico');
 
 
+    /////////////
+    //Simulacion
+    ///////////// 
+    Route::post('generateUsers/{cantidad}', 'Simulacion\SimulacionController@generateData');
+
 
 });
