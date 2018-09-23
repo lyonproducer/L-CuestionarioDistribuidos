@@ -67,6 +67,16 @@ return [
             'prefix'   => '',
         ),
 
+        'cubo' => array(
+            'driver'   => 'sqlsrv',
+            'host'     => '127.0.0.1',
+            'port'     => 1433,
+            'database' => 'cuestionario_cubo',
+            'username' => 'djleo',
+            'password' => 'leo123',
+            'prefix'   => '',
+        ),
+
         'mongodb' => [
             'driver'   => 'mongodb',
             'host'     => '127.0.0.1',

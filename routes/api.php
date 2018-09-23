@@ -72,6 +72,7 @@ Route::group([
     //Simulacion
     ///////////// 
     Route::post('generateUsers/{cantidad}', 'Simulacion\SimulacionController@generateData');
+    Route::post('generateCubeDB','Simulacion\SimulacionController@generateDataCube');
 
 
 });

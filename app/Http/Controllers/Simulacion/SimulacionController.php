@@ -18,6 +18,9 @@ use App\Models\Pensamiento\ResultadosPensamiento;
 use App\Models\Sentimiento\PreguntasSentimiento;
 use App\Models\Sentimiento\ResultadosSentimiento;
 
+use App\models\Cubo\CuboUser;
+use App\models\Cubo\CuboResultado;
+
 
 class SimulacionController extends Controller
 {
@@ -210,5 +213,48 @@ class SimulacionController extends Controller
         return response()->json(['data' => 'Agregado con exito']);
         //return response()->json($users);
 
+    }
+
+    public function generateDataCube(){
+
+        $users = User::all();
+        $results = Resultado::all();
+
+        $array = [];
+
+        foreach ($users as $user) {
+
+            $userCube = new CuboUser;
+            $userCube->nombre = $user->nombre;
+            $userCube->cedula = $user->cedula;
+            $userCube->pais = $user->pais;
+            $userCube->profesion = $user->profesion;
+            $userCube->sexo = $user->sexo;
+            $userCube->fechaNacimiento = $user->fechaNacimiento;
+            $userCube->edad = $user->edad;
+            $userCube->estadoCivil = $user->estadoCivil; 
+            $userCube->tieneTrabajo = $user->tieneTrabajo;
+            $userCube->vivePadres = $user->vivePadres;
+            $userCube->tieneHermanos = $user->tieneHermanos;
+
+            if($user->tieneHermanos=='Si'){
+                $userCube->hermanos = $user->hermanos;
+            }
+            $userCube->save();
+            //array_push($array,$userCube);
+        }
+
+        foreach ($results as $result) {
+
+            $resultCube = new CuboResultado;
+            $resultCube->tipo = $result->tipo;
+            $resultCube->cedula = $result->cedula;
+            $resultCube->total = $result->total;
+            $resultCube->save();
+            //array_push($array,$resultCube);
+        }
+
+        return response()->json(['data'=> 'Guardado correctamente']);
+        //return $array;
     }
 }
