@@ -241,8 +241,11 @@ class SimulacionController extends Controller
                 $userCube->hermanos = $user->hermanos;
             }
             $userCube->save();
-            //array_push($array,$userCube);
+            array_push($array,$userCube->id);
+
         }
+
+        $aux = 0;
 
         foreach ($results as $result) {
 
@@ -250,11 +253,66 @@ class SimulacionController extends Controller
             $resultCube->tipo = $result->tipo;
             $resultCube->cedula = $result->cedula;
             $resultCube->total = $result->total;
+            $resultCube->id_usuario = $array[$aux];
             $resultCube->save();
             //array_push($array,$resultCube);
+            $aux++;
         }
 
         return response()->json(['data'=> 'Guardado correctamente']);
         //return $array;
+    }
+
+
+    public function eraseData(){
+
+        $users = User::all();
+        $results = Resultado::all();
+
+        $instintos = ResultadosInstinto::all();
+        $pensamientos = ResultadosPensamiento::all();
+        $sentimientos = ResultadosSentimiento::all();
+
+        $isdeleted= false;
+
+        foreach ($users as $user){
+
+            if($user){
+                $isdeleted = true;
+                $user->delete();
+            }else
+            $isdeleted = false;
+        }
+
+        foreach ($results as $result) {
+
+            if($result){
+                $result->delete();
+            }
+        }
+
+        foreach ($instintos as $instinto) {
+
+            if($instinto){
+                $instinto->delete();
+            }
+        }
+
+        foreach ($sentimientos as $sentimiento) {
+
+            if($sentimiento){
+                $sentimiento->delete();
+            }
+        }
+
+        foreach ($pensamientos as $pensmiento) {
+
+            if($pensmiento){
+                $pensmiento->delete();
+            }
+        }
+
+        return response()->json($isdeleted);
+
     }
 }

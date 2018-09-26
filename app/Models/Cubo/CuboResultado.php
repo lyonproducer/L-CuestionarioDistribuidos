@@ -11,6 +11,6 @@ class CuboResultado extends Model
 
     protected $fillable = [
         'cedula', 
-        'tipo','total',
+        'tipo','total','id_usuario'
     ];
 }
