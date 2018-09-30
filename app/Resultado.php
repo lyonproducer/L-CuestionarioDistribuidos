@@ -12,7 +12,7 @@ class Resultado extends Eloquent
 
     protected $fillable = [
         'cedula', 
-        'tipo','total',
+        'tipo','total'
     ];
     
 }

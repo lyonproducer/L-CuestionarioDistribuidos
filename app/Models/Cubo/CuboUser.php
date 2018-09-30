@@ -25,6 +25,7 @@ class CuboUser extends Model
         'tieneTrabajo',
         'vivePadres',
         'tieneHermanos',
-        'hermanos'
+        'hermanos',
+        'tipo'
     ];
 }

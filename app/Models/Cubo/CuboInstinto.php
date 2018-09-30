@@ -4,13 +4,14 @@ namespace App\Models\Cubo;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CuboResultado extends Model
+class CuboInstinto extends Model
 {
     protected $connection = 'cubo';
-    protected $table = 'resultados';
+    protected $table = 'instinto';
 
     protected $fillable = [
-        'cedula', 
-        'tipo','total','id_usuario'
+        'total',
+        'tipo',
+        'id_usuario'
     ];
 }

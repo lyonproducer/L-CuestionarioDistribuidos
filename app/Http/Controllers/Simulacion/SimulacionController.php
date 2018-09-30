@@ -19,7 +19,9 @@ use App\Models\Sentimiento\PreguntasSentimiento;
 use App\Models\Sentimiento\ResultadosSentimiento;
 
 use App\models\Cubo\CuboUser;
-use App\models\Cubo\CuboResultado;
+use App\models\Cubo\CuboPensamiento;
+use App\models\Cubo\CuboSentimiento;
+use App\models\Cubo\CuboInstinto;
 
 
 class SimulacionController extends Controller
@@ -218,9 +220,10 @@ class SimulacionController extends Controller
     public function generateDataCube(){
 
         $users = User::all();
-        $results = Resultado::all();
+        //$pensamiento = Resultado::where('tipo','pensador');
+        //$results = Resultado::all();
 
-        $array = [];
+        $arrayUser = [];
 
         foreach ($users as $user) {
 
@@ -240,26 +243,55 @@ class SimulacionController extends Controller
             if($user->tieneHermanos=='Si'){
                 $userCube->hermanos = $user->hermanos;
             }
+
             $userCube->save();
-            array_push($array,$userCube->id);
-
+            array_push($arrayUser,$userCube);
         }
 
-        $aux = 0;
 
-        foreach ($results as $result) {
+        $aux=0;
 
-            $resultCube = new CuboResultado;
-            $resultCube->tipo = $result->tipo;
-            $resultCube->cedula = $result->cedula;
-            $resultCube->total = $result->total;
-            $resultCube->id_usuario = $array[$aux];
-            $resultCube->save();
-            //array_push($array,$resultCube);
-            $aux++;
+        foreach ($users as $user) {
+
+            $result = Resultado::where('cedula',$user->cedula)->first();
+            //dd($result->tipo);
+            
+            if(($result->tipo == "Pensador") || ($result->tipo == "Leal")
+            || ($result->tipo == "Entusiasta")){
+
+                $pensamiento = new  CuboPensamiento;
+                $pensamiento->tipo = $result->tipo;
+                $pensamiento->total = $result->total;
+                $pensamiento->id_usuario = $arrayUser[$aux]->id;
+                $pensamiento->save();
+            }
+            
+
+            if(($result->tipo == "Ayudador") || ($result->tipo == "Triunfador")
+            || ($result->tipo == "Artista")){
+
+                $sentimiento = new  CuboSentimiento;
+                $sentimiento->tipo = $result->tipo;
+                $sentimiento->total = $result->total;
+                $sentimiento->id_usuario = $arrayUser[$aux]->id;
+                $sentimiento->save();
+            }
+
+            if(($result->tipo == "Reformador") || ($result->tipo == "Protector")
+            || ($result->tipo == "Pacifico")){
+
+                $instinto = new  CuboInstinto;
+                $instinto->tipo = $result->tipo;
+                $instinto->total = $result->total;
+                $instinto->id_usuario = $arrayUser[$aux]->id;
+                $instinto->save();
+            }
+
+            $aux++; 
         }
 
-        return response()->json(['data'=> 'Guardado correctamente']);
+        return response()->json($arrayUser);
+        //return response()->json(['data'=> 'Guardado correctamente']);
         //return $array;
     }
 
