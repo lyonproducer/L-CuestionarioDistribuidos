@@ -316,6 +316,7 @@ class SimulacionController extends Controller
             $isdeleted = false;
         }
 
+        
         foreach ($results as $result) {
 
             if($result){
